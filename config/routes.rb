@@ -1,8 +1,26 @@
-Ashwin::Application.routes.draw do
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
-  root to: "static_pages#home"
+Ashwin::Application.routes.draw do 
+  
+  
+  resources :users do
+    collection do
+      put 'updaterole'
+    end
+  end 
 
+  resources :types do
+    collection do
+      put 'typeupdate'
+    end
+  end
+
+
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :domains 
+
+  root to: "static_pages#home"
+  get 'domains/resourcepage1'
+
+  match '/assignrole', to: "domains#assignrole"
   match '/signup', to: "users#new"
   match '/signin', to: "sessions#new"
   match '/signout', to: "sessions#destroy", via: :delete

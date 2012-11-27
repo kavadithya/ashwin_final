@@ -1,0 +1,15 @@
+
+<div class="row">
+  <aside class="span4">
+
+  	<b> The users who are part of this domain are </b>
+
+    <section>
+      
+        <% @domain.users.all.each do |d| %>
+        	<%= d.name %>  <%= link_to "Assign Role", edit_user_path(d) %> </br>
+        <% end %>
+      
+    </section>
+  </aside>
+</div>

@@ -8,4 +8,17 @@
       </h1>
     </section>
   </aside>
+</div>
+
+
+   <% if @user.domain %>
+  	This user is  a part of domain: 
+  	<h4><%= @user.domain.name %></h4> owned by <%= @user.domain.owner %>
+   <% end %>
+</br></br>
+The roles of this user are
+<% @user.types.each do |t| %>
+  <%= t.name %> </br>
+<% end %>
+
   

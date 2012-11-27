@@ -15,7 +15,30 @@ class UsersController < ApplicationController
   end
   def create
     @user = User.new(params[:user])
+
     if @user.save
+      domain_now = @user.email.split('@').last
+      if Domain.all.empty?
+
+      	d_first = Domain.new(name: domain_now)
+      	d_first.users<<(@user)
+      	d_first.save
+      	
+      else
+      	d_flag = 0
+      	Domain.all.each do |d|
+    		if d.name == domain_now
+    			d.users<<(@user)
+    			d_flag = 1
+    		end
+    	end
+    	if d_flag == 0
+    		d_new = Domain.new(name: domain_now)
+    		d_new.users<<(@user)
+    		d_new.save
+    		
+    	end
+      end
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
       sign_in @user
@@ -26,6 +49,20 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @user_roles = @user.types
+    @all_roles = @user.domain.types.all
+  end
+  def updaterole
+    @roles = params[:roles_names]
+    @user = User.find(params[:id])
+    @roles.each do |r|
+      if not @user.types.find_by_name(r)
+        @user.types<<(@user.domain.types.find_by_name(r))
+      end
+    redirect_to @user
+    end
+
+
   end
   def index
     @users = User.paginate(page: params[:page]) 
@@ -40,6 +77,7 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
   private
 
     def correct_user

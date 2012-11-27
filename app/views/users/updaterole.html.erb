@@ -1,0 +1,15 @@
+YELLO
+user is <%= @user.name %>
+The roles of this user are
+<% @user.types.each do |t| %>
+  <%= t.name %> </br>
+<% end %>
+
+
+</br></br>
+
+<% @roles.each do |r| %>
+	<%= r %>
+	<%= Type.find_by_name(r).name %>
+	<%= r.class %>
+<% end %>
