@@ -1,0 +1,12 @@
+<% provide(:title, 'All Resources') %>
+<h1>All the resources available in your domain are</h1>
+
+
+<% @element.each do |r| %>
+<ul class="users">
+ <li>
+ 	<%= link_to r.name, r %>	
+  <%= link_to "Modify resource access levels", edit_element_path(r) %>
+ </li>
+</ul>
+<% end %>

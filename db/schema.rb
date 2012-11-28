@@ -11,13 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127210104) do
+ActiveRecord::Schema.define(:version => 20121128151502) do
 
   create_table "domains", :force => true do |t|
     t.string   "name"
-    t.string   "owner"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "ownerid"
+  end
+
+  create_table "elements", :force => true do |t|
+    t.string   "name"
+    t.string   "link"
+    t.integer  "domain_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "elements_types", :id => false, :force => true do |t|
+    t.integer "element_id"
+    t.integer "type_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -49,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20121127210104) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.integer  "domain_id"
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

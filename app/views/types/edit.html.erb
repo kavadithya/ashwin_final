@@ -1,0 +1,41 @@
+<div class="row">
+
+<%= form_tag( {:controller => :types, :action => :update, :id => @role.id}, {:method => :put} ) do %>
+<div class="row">
+  <div class="span6">
+    <ul>
+      Resources which are already included:
+      
+        <% @added_elements.each do |ar| %>
+        <li>  
+          <%= check_box_tag "elements_names[]", ar.id, checked = true %>
+          <%= ar.name %>
+        </li>
+        <% end %>
+      
+    </ul>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="span6">
+    <ul>
+      Resources which can be added:
+      
+        <% @remaining_elements.each do |rr| %>
+        <li>
+          <%= check_box_tag "elements_names[]", rr.id %>
+          <%= rr.name %>
+        </li>
+        <% end %>
+      
+    </ul>
+  </div>
+</div>
+
+<%= submit_tag "Modify Role Access" %>
+
+<% end %>
+
+</div>

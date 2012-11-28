@@ -1,20 +1,23 @@
 # == Schema Information
 #
-# Table name: domains
+# Table name: elements
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
+#  link       :string(255)
+#  domain_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  ownerid    :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
   name: MyString
-  owner: MyString
+  link: MyString
+  domain_id: 1
 
 two:
   name: MyString
-  owner: MyString
+  link: MyString
+  domain_id: 1

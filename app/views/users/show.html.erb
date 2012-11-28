@@ -10,15 +10,50 @@
   </aside>
 </div>
 
-
-   <% if @user.domain %>
-  	This user is  a part of domain: 
-  	<h4><%= @user.domain.name %></h4> owned by <%= @user.domain.owner %>
-   <% end %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <% if @user.domain %>
+  	     <h4>This user is  a part of domain: </h4>
+  	     <h4><%= @user.domain.name %> owned by <%= owner.name %> </h4>
+      <% end %>
+    </section>
+  </aside>
+</div>
 </br></br>
-The roles of this user are
-<% @user.types.each do |t| %>
-  <%= t.name %> </br>
-<% end %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <% if @user.types.empty? %>
+        <h4>No roles have been assigned to you yet. Please contact your administrator to have more access</h4>
+      <% else %>
+        <h4>The roles assigned to this user are</h4>
+        <% @user.types.each do |t| %>
+          <%= t.name %> </br>
+        <% end %>
+      <% end %>
+    </section>
+  </aside>
+</div>
+<div class="row">
+  <aside class="span4">
+    <section>
+      
+      <% if @count_elements != 0 %>
+        <h4>The resources available to this user are</h4>
+        <% @user.types.each do |t| %>
+          <% t.elements.each do |e| %>
+            <%= link_to e.name, e %> 
+          <% end %>
+        <% end %>
+      <% else %>
+        <h4>No resources are available for the roles assigned to you. Please contact your administrator to have more access</h4>
+      <% end %>
+      
+    </section>
+  </aside>
+</div>
+
+
 
   

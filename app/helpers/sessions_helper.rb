@@ -33,5 +33,25 @@ module SessionsHelper
       redirect_to signin_url, notice: "Please sign in."
     end
   end
+  def owner
+    User.find(current_user.domain.ownerid)
+  end
+  private
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user) or current_user.admin?
+    end
+    def destroy
+      User.find(params[:id]).destroy
+      flash[:success] = "User destroyed."
+      redirect_to users_url
+    end
+    def admin_user
+      redirect_to(root_path) unless current_user.admin?
+    end
+    def admin_user?
+      current_user.admin?
+    end
       
 end

@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-#  before_filter :signed_in_user, only: [:edit, :update]
- # before_filter :correct_user,   only: [:edit, :update]
-  #before_filter :admin_user,     only: :destroy
+  before_filter :signed_in_user, only: [:edit, :update]
+  before_filter :correct_user,   only: [:edit, :update]
+  before_filter :admin_user,     only: [:updaterole, :destroy]
+  
   def new
   	@user = User.new
   end
@@ -12,33 +13,42 @@ class UsersController < ApplicationController
     else
       redirect_to root_path
     end
+    @count_elements = 0
+    @user.types.each do |t|
+      @count_elements += t.elements.size
+    end
+
   end
   def create
     @user = User.new(params[:user])
-
+    
     if @user.save
       domain_now = @user.email.split('@').last
       if Domain.all.empty?
 
-      	d_first = Domain.new(name: domain_now)
-      	d_first.users<<(@user)
-      	d_first.save
+      	domain_first = Domain.new(name: domain_now)
+      	domain_first.users<<(@user)
+      	domain_first.save
+       
       	
       else
       	d_flag = 0
       	Domain.all.each do |d|
-    		if d.name == domain_now
-    			d.users<<(@user)
-    			d_flag = 1
-    		end
+    		  if d.name == domain_now
+    			 d.users<<(@user)
+    			 d_flag = 1
+    		  end
+        end  
+        if d_flag == 0
+          domain_new = Domain.new(name: domain_now)
+          domain_new.users<<(@user)
+          domain_new.save
+          
+        
+        end
     	end
-    	if d_flag == 0
-    		d_new = Domain.new(name: domain_now)
-    		d_new.users<<(@user)
-    		d_new.save
-    		
-    	end
-      end
+    	
+    
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
       sign_in @user
@@ -61,11 +71,17 @@ class UsersController < ApplicationController
       end
     redirect_to @user
     end
-
+  end
+  def makeadmin
+    @user = User.find(params[:id])
+    if params[:set_admin]
+      @user.toggle!(:admin)
+      redirect_to correct_user
+    end
 
   end
   def index
-    @users = User.paginate(page: params[:page]) 
+    @users = current_user.domain.users.paginate(page: params[:page]) 
   end
   def update
     @user = User.find(params[:id])
@@ -78,18 +94,5 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
-    end
-    def destroy
-      User.find(params[:id]).destroy
-      flash[:success] = "User destroyed."
-      redirect_to users_url
-    end
-    def admin_user
-      redirect_to(root_path) unless current_user.admin?
-    end
+  
 end

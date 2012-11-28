@@ -10,6 +10,7 @@
 #  password_digest :string(255)
 #  remember_token  :string(255)
 #  domain_id       :integer
+#  admin           :boolean
 #
 
 

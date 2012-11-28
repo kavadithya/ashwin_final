@@ -1,0 +1,6 @@
+<%= @element.name %>
+
+Roles allowed to access this Element are
+<% @element.types.each do |r| %>
+	<%= r.name %>
+<% end %>

@@ -1,0 +1,41 @@
+<div class="row">
+
+<%= form_tag( {:controller => :elements, :action => :update, :id => @element.id}, {:method => :put} ) do %>
+<div class="row">
+  <div class="span6">
+    <ul>
+      Roles which are already allowed:
+      
+        <% @allowed_roles.each do |ar| %>
+        <li>  
+          <%= check_box_tag "roles_names[]", ar.id, checked = true %>
+          <%= ar.name %>
+        </li>
+        <% end %>
+      
+    </ul>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="span6">
+    <ul>
+      Roles which can be added to view this resource:
+      
+        <% @remaining_roles.each do |rr| %>
+        <li>
+          <%= check_box_tag "roles_names[]", rr.id %>
+          <%= rr.name %>
+        </li>
+        <% end %>
+      
+    </ul>
+  </div>
+</div>
+
+<%= submit_tag "Modify Resource Access levels" %>
+
+<% end %>
+
+</div>

@@ -4,8 +4,11 @@ Ashwin::Application.routes.draw do
   resources :users do
     collection do
       put 'updaterole'
+      put 'makeadmin'
     end
   end 
+
+  resources :elements
 
   resources :types do
     collection do

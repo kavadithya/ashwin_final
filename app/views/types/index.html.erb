@@ -1,0 +1,12 @@
+<% provide(:title, 'All Roles') %>
+<h1>All the roles related to your domain are</h1>
+
+
+<% @role.each do |r| %>
+<ul class="users">
+ <li>
+ 	<%= r.name %>	
+  <%= link_to "Modify role access", edit_type_path(r) %>
+ </li>
+</ul>
+<% end %>

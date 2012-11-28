@@ -1,0 +1,33 @@
+<% provide(:title, 'Create Resource') %>
+<h1>Create Resource</h1>
+
+  <div class="row">
+    <div class="span6 offset3">
+      <%= form_for(@element) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+
+        <%= f.label :link %>
+        <%= f.text_field :link %>
+
+        
+      
+      Assign Resource to Role(s):
+      <ul>
+        <% @all_roles.each do |r| %>
+        <li>
+          <%= check_box_tag "roles_names[]", r.name %>
+          <%= r.name %>
+        </li>
+        <% end %>
+      </ul>
+      <%= f.submit "Create Resource", class: "btn btn-large btn-primary" %>
+      <% end %>
+
+        
+
+
+
+  </div>
+</div>
