@@ -69,11 +69,13 @@ class UsersController < ApplicationController
       @user.toggle!(:admin)
       
     end
-    @roles.each do |r|
-      if not @user.types.find_by_name(r)
-        @user.types<<(@user.domain.types.find_by_name(r))
-      end
-    
+    if params[:roles_names]
+      @roles = params[:roles_names]
+      @roles.each do |r|
+        if not @user.types.find_by_name(r)
+          @user.types<<(@user.domain.types.find_by_name(r))
+        end
+      end    
     end
     redirect_to @user
   end
