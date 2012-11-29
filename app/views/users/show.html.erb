@@ -22,7 +22,7 @@
 </div>
 
 </br></br>
-<% if not admin_user? %>
+<% if signed_in? and not @user.admin? %>
 <div class="row">
   <aside class="span6">
     <section>
