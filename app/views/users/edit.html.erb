@@ -31,7 +31,7 @@
     <% end %>
     </br></br></br></br>
     <%= form_tag( {:controller => :users, :action => :updaterole, :id => @user.id}, {:method => :put} ) do %>
-      <% if current_user == owner %>
+      <% if current_user == owner and @user != current_user%>
         <div class="row">
           <div class="span6 offset3">
             <ul>
