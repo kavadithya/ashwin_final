@@ -53,7 +53,10 @@ module SessionsHelper
     def admin_user?
       if signed_in?
         current_user.admin?
+      else
+        false
       end
+
     end
       
 end
