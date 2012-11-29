@@ -22,7 +22,7 @@
 </div>
 
 </br></br>
-<% if signed_in? and not @user.admin? %>
+<% if signed_in? and current_user == @user and not @user.admin? %>
 <div class="row">
   <aside class="span6">
     <section>
@@ -55,8 +55,9 @@
     </section>
   </aside>
 </div>
-<% else %>
+<% elsif signed_in? and current_user == @user and @user.admin? %>
 <h4>You are an admin here(way to go bro)</h4>
+
 <% end %>
 
 
