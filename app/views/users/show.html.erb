@@ -15,12 +15,14 @@
     <section>
       <% if @user.domain %>
   	     <h4>This user is  a part of domain: </h4>
-  	     <h4><%= @user.domain.name %> owned by <%= owner.name %> </h4>
+  	     <h4><%= @user.domain.name %> owned by <%if current_user != owner %> <%= owner.name %> <% else %> you <% end %></h4>
       <% end %>
     </section>
   </aside>
 </div>
+
 </br></br>
+<% if not admin_user? %>
 <div class="row">
   <aside class="span6">
     <section>
@@ -53,7 +55,9 @@
     </section>
   </aside>
 </div>
-
+<% else %>
+<h4>You are an admin here. Way to go bro</h4>
+<% end %>
 
 
   
