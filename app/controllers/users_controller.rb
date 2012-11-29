@@ -65,12 +65,17 @@ class UsersController < ApplicationController
   def updaterole
     @roles = params[:roles_names]
     @user = User.find(params[:id])
+    if params[:set_admin]
+      @user.toggle!(:admin)
+      
+    end
     @roles.each do |r|
       if not @user.types.find_by_name(r)
         @user.types<<(@user.domain.types.find_by_name(r))
       end
-    redirect_to @user
+    
     end
+    redirect_to @user
   end
   def makeadmin
     @user = User.find(params[:id])

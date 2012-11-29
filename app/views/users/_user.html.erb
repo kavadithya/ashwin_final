@@ -1,4 +1,4 @@
 <li>
   <%= gravatar_for user%>
-  <%= link_to user.name, user %> <%= link_to "edit role", edit_user_path(user) %>
+  <%= link_to user.name, user %> <% if current_user.admin? %> <%= link_to "(edit role)", edit_user_path(user) %> <% end %>
  </li>
