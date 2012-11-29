@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="span4">
+  <aside class="span6">
     <section>
       <h1>
         <%= gravatar_for @user %>
@@ -11,7 +11,7 @@
 </div>
 
 <div class="row">
-  <aside class="span4">
+  <aside class="span6">
     <section>
       <% if @user.domain %>
   	     <h4>This user is  a part of domain: </h4>
@@ -22,7 +22,7 @@
 </div>
 </br></br>
 <div class="row">
-  <aside class="span4">
+  <aside class="span6">
     <section>
       <% if @user.types.empty? %>
         <h4>No roles have been assigned to you yet. Please contact your administrator to have more access</h4>
@@ -36,7 +36,7 @@
   </aside>
 </div>
 <div class="row">
-  <aside class="span4">
+  <aside class="span6">
     <section>
       
       <% if @count_elements != 0 %>
