@@ -1,6 +1,18 @@
-<%= @element.name %>
+<div class="row">
+	<div class="span6">
+		<b><h2><%= @element.name %></h2></b>
+	</div>
+</div>
 
-Roles allowed to access this Element are
-<% @element.types.each do |r| %>
-	<%= r.name %>
-<% end %>
+<div class="row">
+	<div class="span6">
+		<% if not @element.types.empty? %>
+			<h3>Roles allowed to access this Element are</h3>
+			<% @element.types.each do |r| %>
+			<l1><h4> <%= r.name %></h4> </li>
+			<% end %>
+		<% else %>
+			<h3>No Roles are currently allowed access to this resource</h3>
+		<% end %>
+	</div>
+</div>

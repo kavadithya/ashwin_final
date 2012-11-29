@@ -1,5 +1,9 @@
 <% provide(:title, 'All Resources') %>
-<h1>All the resources available in your domain are</h1>
+<% if @element.empty? %>
+	<h4>No resources are currently available in your domain</h4>
+<% else %>
+	<h1>All the resources available in your domain are</h1>
+<% end %>
 
 
 <% @element.each do |r| %>
