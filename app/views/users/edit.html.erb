@@ -32,16 +32,13 @@
     </br></br></br></br>
     <%= form_tag( {:controller => :users, :action => :updaterole, :id => @user.id}, {:method => :put} ) do %>
       <% if current_user == owner and @user != current_user%>
-        <div class="row">
-          <div class="span6 offset3">
             <ul>
               <li>
               <%= check_box_tag "set_admin", "set_admin" %>
               <%= "Set as admin" %>
               </li>
             </ul>
-          </div>
-        </div>
+        
       <% end %>
 
       <% if current_user == owner or current_user.admin? and current_user != @user %>
